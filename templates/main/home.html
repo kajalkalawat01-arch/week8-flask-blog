@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Home - My Blog{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Welcome to My Personal Blog</h1>
+    <a href="{{ url_for('posts.create_post') }}" class="btn btn-primary">
+        Create Post
+    </a>
+</div>
+
+{% for post in posts %}
+<div class="card mb-3">
+    <div class="card-body">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.content[:200] }}</p>
+        <small>By {{ post.author.username }}</small>
+        <br>
+        <a href="{{ url_for('posts.post_detail', post_id=post.id) }}">
+            Read More
+        </a>
+    </div>
+</div>
+{% else %}
+<p>No blog posts yet. Be the first to create one!</p>
+{% endfor %}
+{% endblock %}
